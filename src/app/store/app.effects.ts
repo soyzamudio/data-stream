@@ -1,61 +1,71 @@
 import { Injectable } from "@angular/core";
-import { Store } from "@ngrx/store";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { AppState } from "./app.reducer";
+import { Store } from "@ngrx/store";
+import { map } from 'rxjs/operators';
 import * as appActions from './app.actions';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { AppState } from "./app.reducer";
 
 @Injectable()
 export class AppEffects {
   getAppData$ = createEffect(
     () => this.actions$.pipe(
       ofType(appActions.AppActionTypes.GET_APP_DATA),
-      map(() => this.store.dispatch(new appActions.GetAppDataSuccess()))
+      map((msg: appActions.GetAppData) => this.store.dispatch(new appActions.GetAppDataSuccess(msg.payload))),
     ), {
       dispatch: false,
     }
   );
 
-  getAppDataSuccess$ = createEffect(
+  // getAppDataSuccess$ = createEffect(
+  //   () => this.actions$.pipe(
+  //     ofType(appActions.AppActionTypes.GET_APP_DATA_SUCCESS),
+  //     map(() => console.log('Success'))
+  //   ), {
+  //     dispatch: false,
+  //   }
+  // );
+
+  // getAppDataFailure$ = createEffect(
+  //   () => this.actions$.pipe(
+  //     ofType(appActions.AppActionTypes.GET_APP_DATA_FAILURE),
+  //     map(() => console.log('Failure'))
+  //   ), {
+  //     dispatch: false,
+  //   }
+  // );
+
+  setFilter$ = createEffect(
     () => this.actions$.pipe(
-      ofType(appActions.AppActionTypes.GET_APP_DATA_SUCCESS),
-      map(() => console.log('Success'))
+      ofType(appActions.AppActionTypes.SET_DATA_FILTER),
+      map((action: appActions.SetDataFilter) => this.store.dispatch(new appActions.SetDataFilterSuccess(action.payload)))
     ), {
       dispatch: false,
     }
   );
 
-  getAppDataFailure$ = createEffect(
+  setFilterSuccess$ = createEffect(
     () => this.actions$.pipe(
-      ofType(appActions.AppActionTypes.GET_APP_DATA_FAILURE),
-      map(() => console.log('Failure'))
+      ofType(appActions.AppActionTypes.SET_DATA_FILTER_SUCCESS),
+      map(() => console.log('Filter Success'))
     ), {
       dispatch: false,
     }
   );
+
+  removeFilter$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(appActions.AppActionTypes.REMOVE_DATA_FILTER),
+      map((action: appActions.RemoveDataFilter) => {
+        console.log(action.payload)
+        this.store.dispatch(new appActions.RemoveDataFilterSuccess(action.payload))
+      })
+    ), {
+      dispatch: false,
+    }
+  )
 
   constructor(
     private store: Store<AppState>,
     private actions$: Actions,
   ) {}
-
-  // @Effect()
-  // getAppData$ = this.actions$.pipe(
-  //   ofType(appActions.AppActionTypes.GET_APP_DATA),
-  //   map((action: appActions.GetAppData) => {
-  //     this.store.dispatch(new appActions.GetAppDataSuccess());
-  //   })
-  // );
-
-  // @Effect({ dispatch: false })
-  // getAppDataSuccess$ = this.actions$.pipe(
-  //   ofType(appActions.AppActionTypes.GET_APP_DATA_SUCCESS),
-  //   map(() => console.log('Success'))
-  // );
-
-  // @Effect({ dispatch: false })
-  // getAppDataFailure$ = this.actions$.pipe(
-  //   ofType(appActions.AppActionTypes.GET_APP_DATA_FAILURE),
-  //   map(() => console.log('Failure'))
-  // );
 }
