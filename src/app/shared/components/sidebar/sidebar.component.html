@@ -1,0 +1,30 @@
+<div class="sidebar-left">
+  <div class="sidebar" style="margin-top: 12px; margin-bottom: 35px;">
+    <div class="sidebar-icon">
+      <img src="https://i.ibb.co/86d7x4Z/twitter.png" height="30px" width="30px" />
+    </div>
+  </div>
+
+  <div class="sidebar" style="margin-top: 12px" *ngFor="let option of menuOptions">
+    <div class="sidebar-icon">
+      <fa-icon [icon]="option.icon"></fa-icon>
+    </div>
+    <div style="margin-left: 10px;">
+      <p *ngIf="!option.href" style="margin-top: 5px;"><strong>{{option.label}}</strong></p>
+      <a *ngIf="option.href" [href]="option.href" target="_blank"><strong>{{option.label}}</strong></a>
+    </div>
+
+  </div>
+  <div class="sidebar" style="margin-top: 12px" (click)="toggleDarkMode()">
+    <div class="sidebar-icon">
+      <fa-icon icon="adjust"></fa-icon>
+    </div>
+    <div style="margin-left: 10px;">
+      <p style="margin-top: 5px;"><strong>{{ darkMode ? 'Light' : 'Dark' }} mode</strong></p>
+    </div>
+  </div>
+
+  <button class="btn-primary" (click)="clean()">
+    <strong>Stop Stream</strong>
+  </button>
+</div>

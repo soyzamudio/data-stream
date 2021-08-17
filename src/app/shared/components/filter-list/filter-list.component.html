@@ -1,0 +1,4 @@
+<div class="filter-list">
+  <p class="filter-list-title"><strong>Filter List</strong></p>
+  <app-filter-item [item]="item" [data$]="data$" *ngFor="let item of hashtags$ | async; let i = index"></app-filter-item>
+</div>

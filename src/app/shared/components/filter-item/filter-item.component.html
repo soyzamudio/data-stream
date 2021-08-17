@@ -1,0 +1,11 @@
+<div class="filter-item" >
+  <div>
+    <p><strong>{{item}}</strong></p>
+    <p>Tweeted in the last minute: {{(filterFeed(item) | async)?.length}}</p>
+  </div>
+  <div>
+    <button class="btn-alt" (click)="removeFilter(index)">
+      <strong>Remove</strong>
+    </button>
+  </div>
+</div>
