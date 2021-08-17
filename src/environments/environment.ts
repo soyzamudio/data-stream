@@ -13,6 +13,7 @@ export const environment = {
       image: 'https://i.ibb.co/6tKFLWG/home.png',
       label: 'Home',
       icon: 'home' as IconProp,
+      href: null,
     },
     {
       image: 'https://i.ibb.co/G7jRx4j/hash.png',
@@ -30,6 +31,7 @@ export const environment = {
       image: 'https://i.ibb.co/b2zRPbZ/email.png',
       label: 'zamudio@outlook.com',
       icon: 'envelope' as IconProp,
+      href: null,
     },
   ]
 };

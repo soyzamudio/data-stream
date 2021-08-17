@@ -1,6 +1,7 @@
 import { PubnubService } from './../../services/pubnub.service';
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
   selector: 'app-sidebar',
